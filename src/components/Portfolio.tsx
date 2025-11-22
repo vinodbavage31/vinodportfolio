@@ -3,9 +3,9 @@ import ProjectCard from "./ProjectCard";
 const Portfolio = () => {
   const projects = [
     {
-      title: "Crop Yield Prediction",
-      description: "Final year project integrating soil type analysis, disease detection, and sensor data to predict crop yield using advanced machine learning models.",
-      technologies: ["Python", "Machine Learning", "IoT Sensors", "Data Analytics"],
+      title: "ITSM Predictive Automation & Risk Mitigation",
+      description: "Developed an end-to-end Machine Learning pipeline using a 45K-record SQL dataset to transform IT Service Management. The solution achieved 96% accuracy in predicting high-priority incidents and 98% F1-score in proactively identifying high-risk change requests (RFCs).",
+      technologies: ["Python", "Machine Learning", "SQL", "Predictive Modeling", "Data Analytics"],
       link: "#",
     },
     {
