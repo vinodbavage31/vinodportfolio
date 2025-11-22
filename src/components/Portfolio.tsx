@@ -6,31 +6,31 @@ const Portfolio = () => {
       title: "ITSM Predictive Automation & Risk Mitigation",
       description: "Developed an end-to-end Machine Learning pipeline using a 45K-record SQL dataset to transform IT Service Management. The solution achieved 96% accuracy in predicting high-priority incidents and 98% F1-score in proactively identifying high-risk change requests (RFCs).",
       technologies: ["Python", "Machine Learning", "SQL", "Predictive Modeling", "Data Analytics"],
-      link: "#",
+      link: "https://github.com/vinodbavage31/ABC-TECH-PROJECT",
     },
     {
       title: "RiceLeaf Disease Detection",
       description: "Developed a computer vision model to detect and classify rice leaf diseases, helping farmers identify crop health issues early.",
       technologies: ["Deep Learning", "Computer Vision", "TensorFlow", "Image Processing"],
-      link: "#",
+      link: "https://github.com/vinodbavage31/RiceLeaf-disease-detection",
     },
     {
       title: "GameWinnerPred",
       description: "Predictive analytics system to forecast game outcomes using historical data and machine learning algorithms.",
       technologies: ["Python", "Scikit-learn", "Data Analysis", "Predictive Modeling"],
-      link: "#",
+      link: "https://github.com/vinodbavage31/PUBG-GameWinnerPred",
     },
     {
       title: "HousePricePred",
       description: "Real estate price prediction model using multiple regression techniques and feature engineering for accurate property valuations.",
       technologies: ["Python", "Regression", "Feature Engineering", "Data Visualization"],
-      link: "#",
+      link: "https://github.com/vinodbavage31/House-price-pred",
     },
     {
       title: "BikeRental Analysis",
       description: "Comprehensive analysis and prediction of bike rental trends, incorporating temporal patterns and environmental factors.",
       technologies: ["Python", "Time Series", "Pandas", "Statistical Analysis"],
-      link: "#",
+      link: "https://github.com/vinodbavage31/bike-rental",
     },
   ];
 
