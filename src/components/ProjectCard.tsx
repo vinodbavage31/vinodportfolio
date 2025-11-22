@@ -1,6 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 
 interface ProjectCardProps {
   title: string;
@@ -10,8 +12,17 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ title, description, technologies, link }: ProjectCardProps) => {
+  const { ref, isVisible } = useScrollAnimation(0.2);
+
   return (
-    <Card className="group hover:shadow-[var(--shadow-soft)] transition-all duration-300 hover:scale-[1.02] border-2 hover:border-primary/50">
+    <Card 
+      ref={ref}
+      className={cn(
+        "group hover:shadow-[var(--shadow-soft)] transition-all duration-300 hover:scale-[1.02] border-2 hover:border-primary/50",
+        "opacity-0 translate-y-10",
+        isVisible && "animate-fade-in opacity-100 translate-y-0"
+      )}
+    >
       <CardHeader>
         <div className="flex items-start justify-between">
           <CardTitle className="text-2xl group-hover:text-primary transition-colors">
