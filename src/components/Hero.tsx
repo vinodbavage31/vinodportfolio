@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, Code2, Database } from "lucide-react";
+import { ArrowRight, Sparkles, Code2, Database, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import profileImage from "@/assets/profile.jpg";
@@ -110,6 +110,17 @@ const Hero = () => {
               className="border-2 border-primary/30 hover:border-primary bg-background/50 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300 hover:scale-105 text-lg px-8 py-6"
             >
               Contact Me
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              asChild
+              className="border-2 border-accent/30 hover:border-accent bg-background/50 backdrop-blur-sm hover:bg-accent/10 transition-all duration-300 hover:scale-105 text-lg px-8 py-6"
+            >
+              <a href="/Vinod_Bavage_Resume.pdf" download="Vinod_Bavage_Resume.pdf" className="flex items-center">
+                <Download className="mr-2 h-5 w-5" />
+                Download Resume
+              </a>
             </Button>
           </div>
 
