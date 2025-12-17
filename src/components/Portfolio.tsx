@@ -12,7 +12,7 @@ const Portfolio = () => {
       title: "RiceLeaf Disease Detection",
       description: "Developed a computer vision model to detect and classify rice leaf diseases, helping farmers identify crop health issues early.",
       technologies: ["Deep Learning", "Computer Vision", "TensorFlow", "Image Processing"],
-      link: "https://github.com/vinodbavage31/RiceLeaf-disease-detection",
+      link: "https://riceleafdetection.lovable.app/",
     },
     {
       title: "GameWinnerPred",
