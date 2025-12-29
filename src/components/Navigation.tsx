@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
@@ -55,15 +55,37 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
+          {/* Social Links & Mobile Menu Button */}
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/in/vinodbavage"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://github.com/vinodbavage31"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="GitHub"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -80,6 +102,26 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
+            <div className="flex items-center gap-4 px-4 pt-2 border-t">
+              <a
+                href="https://www.linkedin.com/in/vinodbavage"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="https://github.com/vinodbavage31"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="GitHub"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       )}
