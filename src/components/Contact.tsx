@@ -1,5 +1,5 @@
-import { Mail, Phone, Linkedin, Github, Loader2 } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Mail, Phone, Linkedin, Github, Loader2, MapPin } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -29,7 +29,6 @@ const Contact = () => {
     e.preventDefault();
     setErrors({});
 
-    // Validate form data
     const validation = contactSchema.safeParse(formData);
     if (!validation.success) {
       const fieldErrors: Record<string, string> = {};
@@ -94,8 +93,8 @@ const Contact = () => {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      value: "linkedin.com/in/vinod-bavage-5375a8380",
-      href: "https://linkedin.com/in/vinod-bavage-5375a8380",
+      value: "linkedin.com/in/vinodbavage",
+      href: "https://www.linkedin.com/in/vinodbavage",
     },
     {
       icon: Github,
@@ -106,60 +105,58 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto space-y-12">
-          {/* Section Header */}
-          <div className="text-center space-y-4 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold">Get In Touch</h2>
-            <p className="text-muted-foreground text-lg">
-              Let's discuss how I can contribute to your next project
-            </p>
-          </div>
+    <section id="contact" className="section-padding bg-secondary/30">
+      <div className="section-container">
+        <div className="section-header">
+          <h2 className="section-title">Get In Touch</h2>
+          <p className="section-subtitle">
+            Interested in working together? Let's connect and discuss opportunities.
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Info */}
-            <div className="space-y-6 animate-fade-in">
-              <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Contact Info */}
+          <div className="space-y-6">
+            <h3 className="text-xl font-semibold">Contact Information</h3>
+            <div className="space-y-4">
               {contactInfo.map((item) => (
-                <Card
+                <a
                   key={item.label}
-                  className="p-4 hover:shadow-[var(--shadow-soft)] transition-all duration-300 border-2 hover:border-primary/50"
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="flex items-center gap-4 p-4 rounded-lg bg-card border hover:border-primary/30 hover:shadow-[var(--shadow-soft)] transition-all duration-300 group"
                 >
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 group"
-                  >
-                    <div className="p-3 bg-[image:var(--gradient-primary)] rounded-lg group-hover:scale-110 transition-transform">
-                      <item.icon className="h-5 w-5 text-primary-foreground" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground">{item.label}</p>
-                      <p className="font-medium group-hover:text-primary transition-colors">
-                        {item.value}
-                      </p>
-                    </div>
-                  </a>
-                </Card>
+                  <div className="p-2.5 bg-primary/10 rounded-lg group-hover:bg-primary/15 transition-colors">
+                    <item.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">{item.label}</p>
+                    <p className="font-medium group-hover:text-primary transition-colors">
+                      {item.value}
+                    </p>
+                  </div>
+                </a>
               ))}
             </div>
+          </div>
 
-            {/* Contact Form */}
-            <Card className="p-6 border-2 animate-fade-in">
-              <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Contact Form */}
+          <Card className="border-0 shadow-[var(--shadow-card)]">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
                     Name
                   </label>
                   <Input
                     id="name"
-                    placeholder="Your Name"
+                    placeholder="Your name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     disabled={isSubmitting}
-                    required
+                    className={errors.name ? "border-destructive" : ""}
                   />
                   {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                 </div>
@@ -174,7 +171,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     disabled={isSubmitting}
-                    required
+                    className={errors.email ? "border-destructive" : ""}
                   />
                   {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                 </div>
@@ -184,20 +181,16 @@ const Contact = () => {
                   </label>
                   <Textarea
                     id="message"
-                    placeholder="Your message..."
-                    rows={5}
+                    placeholder="How can I help you?"
+                    rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     disabled={isSubmitting}
-                    required
+                    className={errors.message ? "border-destructive" : ""}
                   />
                   {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                 </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-[image:var(--gradient-primary)] hover:shadow-[var(--shadow-glow)] transition-all duration-300"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -208,8 +201,8 @@ const Contact = () => {
                   )}
                 </Button>
               </form>
-            </Card>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

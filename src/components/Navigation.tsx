@@ -8,7 +8,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -22,24 +22,27 @@ const Navigation = () => {
   const navItems = [
     { label: "Home", id: "home" },
     { label: "About", id: "about" },
-    { label: "Portfolio", id: "portfolio" },
+    { label: "Skills", id: "skills" },
+    { label: "Projects", id: "projects" },
     { label: "Contact", id: "contact" },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md border-b shadow-sm"
+          : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="section-container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
             onClick={() => scrollToSection("home")}
-            className="text-xl font-bold bg-clip-text text-transparent bg-[image:var(--gradient-primary)] hover:scale-105 transition-transform"
+            className="text-xl font-bold text-foreground hover:text-primary transition-colors"
           >
-            VB
+            Vinod Bavage
           </button>
 
           {/* Desktop Navigation */}
@@ -48,42 +51,40 @@ const Navigation = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.label}
               </button>
             ))}
           </div>
 
-          {/* Social Links & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/in/vinodbavage"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/vinodbavage31"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-            </div>
+          {/* Social Links & Mobile Menu */}
+          <div className="flex items-center gap-3">
+            <a
+              href="https://www.linkedin.com/in/vinodbavage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href="https://github.com/vinodbavage31"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
             <Button
               variant="ghost"
               size="icon"
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X /> : <Menu />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
@@ -91,37 +92,17 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-t animate-fade-in">
-          <div className="container mx-auto px-4 py-4 space-y-4">
+        <div className="md:hidden bg-background border-b">
+          <div className="section-container py-4 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-4 py-2 text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors font-medium"
+                className="block w-full text-left px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-colors"
               >
                 {item.label}
               </button>
             ))}
-            <div className="flex items-center gap-4 px-4 pt-2 border-t">
-              <a
-                href="https://www.linkedin.com/in/vinodbavage"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/vinodbavage31"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-            </div>
           </div>
         </div>
       )}
