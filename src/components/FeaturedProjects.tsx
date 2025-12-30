@@ -44,8 +44,9 @@ const FeaturedProjects = () => {
               isVisible1 && "animate-fade-in opacity-100 translate-y-0"
             )}
           >
-            <div className="absolute top-4 right-4">
-              <Badge className="bg-primary text-primary-foreground">Featured</Badge>
+            <div className="absolute top-4 right-4 flex gap-2">
+              <Badge className="bg-blue-600 text-white">Live Demo</Badge>
+              <Badge variant="outline" className="border-primary/50 text-primary">Featured</Badge>
             </div>
             <CardHeader className="pt-12 pb-4">
               <CardTitle className="text-2xl md:text-3xl font-bold">
@@ -83,8 +84,14 @@ const FeaturedProjects = () => {
                 ))}
               </div>
 
-              <div className="pt-4">
-                <Button asChild size="lg" className="gap-2 group">
+              <div className="pt-4 flex flex-wrap gap-3">
+                <Button asChild size="lg" className="gap-2 bg-blue-600 hover:bg-blue-700">
+                  <a href="https://proactive-it-insight.lovable.app" target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4" />
+                    Live Demo
+                  </a>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="gap-2 group">
                   <Link to="/abc-tech-itsm">
                     View Project
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
