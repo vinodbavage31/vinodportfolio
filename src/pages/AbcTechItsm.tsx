@@ -107,23 +107,31 @@ const AbcTechItsm = () => {
               Proactive ITSM Incident Analysis & Predictive Automation
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-4">
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="gap-2 bg-blue-600 hover:bg-blue-700">
+                <a
+                  href="https://proactive-it-insight.lovable.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                  Live Demo
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="gap-2">
                 <a
                   href="https://github.com/vinodbavage31/ABC-TECH-PROJECT"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="gap-2"
                 >
                   <Github className="h-5 w-5" />
                   View Repository
                 </a>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" asChild className="gap-2">
                 <a
                   href="https://www.linkedin.com/in/vinodbavage"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="gap-2"
                 >
                   <Linkedin className="h-5 w-5" />
                   Connect on LinkedIn
