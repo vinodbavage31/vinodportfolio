@@ -8,6 +8,7 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "@/lib/emailjs";
 import { z } from "zod";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -16,6 +17,7 @@ const contactSchema = z.object({
 });
 
 const Contact = () => {
+  const { ref, isVisible } = useScrollAnimation(0.1);
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -105,7 +107,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
+    <section id="contact" ref={ref} className="section-padding relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-secondary/30 to-secondary/50" />
       
@@ -114,7 +116,7 @@ const Contact = () => {
       <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
       
       <div className="section-container relative z-10">
-        <div className="section-header">
+        <div className={`section-header transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="section-title">Get In Touch</h2>
           <p className="section-subtitle">
             Interested in working together? Let's connect and discuss opportunities.
@@ -123,7 +125,7 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div className={`space-y-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`} style={{ transitionDelay: '100ms' }}>
             <h3 className="text-xl font-semibold">Contact Information</h3>
             <div className="space-y-4">
               {contactInfo.map((item) => (
@@ -149,7 +151,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className="glass-card border-0 shadow-xl">
+          <Card className={`glass-card border-0 shadow-xl transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`} style={{ transitionDelay: '200ms' }}>
             <CardContent className="p-6">
               <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-5">

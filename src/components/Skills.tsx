@@ -2,8 +2,11 @@ import { Code2, Database, Brain, BarChart3, GitBranch, LineChart } from "lucide-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import DataFlowDecoration from "./DataFlowDecoration";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Skills = () => {
+  const { ref, isVisible } = useScrollAnimation(0.1);
+
   const skillCategories = [
     {
       title: "Programming",
@@ -56,7 +59,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="section-padding relative overflow-hidden">
+    <section id="skills" ref={ref} className="section-padding relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +75,7 @@ const Skills = () => {
       <DataFlowDecoration />
       
       <div className="section-container relative z-10">
-        <div className="section-header">
+        <div className={`section-header transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="section-title">Skills & Expertise</h2>
           <p className="section-subtitle">
             Technical skills and tools I use to build data-driven solutions
@@ -83,7 +86,8 @@ const Skills = () => {
           {skillCategories.map((category, index) => (
             <Card
               key={index}
-              className={`glass-card border-2 ${category.borderColor} hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+              className={`glass-card border-2 ${category.borderColor} hover:shadow-xl transition-all duration-700 hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               <CardHeader className="pb-3">
                 <div className="flex items-center gap-3">

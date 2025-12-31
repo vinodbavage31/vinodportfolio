@@ -1,10 +1,13 @@
 import { GraduationCap, Target, Briefcase } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import NeuralNetworkDecoration from "./NeuralNetworkDecoration";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const About = () => {
+  const { ref, isVisible } = useScrollAnimation(0.1);
+
   return (
-    <section id="about" className="section-padding relative overflow-hidden">
+    <section id="about" ref={ref} className="section-padding relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-secondary/30 to-transparent" />
       
@@ -13,7 +16,7 @@ const About = () => {
       <NeuralNetworkDecoration variant="right" className="hidden lg:block" />
       
       <div className="section-container relative z-10">
-        <div className="section-header">
+        <div className={`section-header transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="section-title">About Me</h2>
           <p className="section-subtitle">
             Passionate about turning data into insights and building intelligent solutions
@@ -22,7 +25,7 @@ const About = () => {
 
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Brief Background */}
-          <Card className="glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className={`glass-card hover:shadow-xl transition-all duration-700 hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '100ms' }}>
             <CardContent className="p-6 md:p-8">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl shrink-0">
@@ -43,7 +46,7 @@ const About = () => {
           </Card>
 
           {/* Career Focus */}
-          <Card className="glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className={`glass-card hover:shadow-xl transition-all duration-700 hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
             <CardContent className="p-6 md:p-8">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl shrink-0">
@@ -63,7 +66,7 @@ const About = () => {
           </Card>
 
           {/* What I'm Looking For */}
-          <Card className="glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className={`glass-card hover:shadow-xl transition-all duration-700 hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '300ms' }}>
             <CardContent className="p-6 md:p-8">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl shrink-0">
