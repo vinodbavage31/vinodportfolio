@@ -1,4 +1,4 @@
-import { Mail, Phone, Linkedin, Github, Loader2, MapPin } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -105,8 +105,15 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding bg-secondary/30">
-      <div className="section-container">
+    <section id="contact" className="section-padding relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-secondary/30 to-secondary/50" />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
+      
+      <div className="section-container relative z-10">
         <div className="section-header">
           <h2 className="section-title">Get In Touch</h2>
           <p className="section-subtitle">
@@ -125,9 +132,9 @@ const Contact = () => {
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-card border hover:border-primary/30 hover:shadow-[var(--shadow-soft)] transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 rounded-xl glass-card hover:shadow-lg transition-all duration-300 group hover:-translate-y-0.5"
                 >
-                  <div className="p-2.5 bg-primary/10 rounded-lg group-hover:bg-primary/15 transition-colors">
+                  <div className="p-2.5 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl group-hover:from-primary/30 group-hover:to-primary/20 transition-colors">
                     <item.icon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -142,7 +149,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className="border-0 shadow-[var(--shadow-card)]">
+          <Card className="glass-card border-0 shadow-xl">
             <CardContent className="p-6">
               <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -156,7 +163,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     disabled={isSubmitting}
-                    className={errors.name ? "border-destructive" : ""}
+                    className={`bg-background/50 ${errors.name ? "border-destructive" : ""}`}
                   />
                   {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                 </div>
@@ -171,7 +178,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     disabled={isSubmitting}
-                    className={errors.email ? "border-destructive" : ""}
+                    className={`bg-background/50 ${errors.email ? "border-destructive" : ""}`}
                   />
                   {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                 </div>
@@ -186,11 +193,11 @@ const Contact = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     disabled={isSubmitting}
-                    className={errors.message ? "border-destructive" : ""}
+                    className={`bg-background/50 ${errors.message ? "border-destructive" : ""}`}
                   />
                   {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                 </div>
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                <Button type="submit" className="w-full shadow-lg hover:shadow-xl transition-shadow" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />

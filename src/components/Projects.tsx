@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, Github, Star } from "lucide-react";
+import { ArrowRight, ExternalLink, Github, Star, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -53,8 +53,15 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section-padding">
-      <div className="section-container">
+    <section id="projects" className="section-padding relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
+      
+      {/* Decorative orbs */}
+      <div className="absolute top-1/4 -right-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -left-32 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
+      
+      <div className="section-container relative z-10">
         <div className="section-header">
           <h2 className="section-title">Projects</h2>
           <p className="section-subtitle">
@@ -65,19 +72,25 @@ const Projects = () => {
         {/* Featured Projects */}
         <div className="mb-16">
           <div className="flex items-center gap-2 mb-6">
-            <Star className="h-5 w-5 text-primary" />
+            <div className="p-1.5 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg">
+              <Sparkles className="h-5 w-5 text-primary" />
+            </div>
             <h3 className="text-xl font-semibold">Featured Projects</h3>
           </div>
           <div className="grid lg:grid-cols-2 gap-6">
             {featuredProjects.map((project, index) => (
               <Card
                 key={index}
-                className="border-2 border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-[var(--shadow-soft)]"
+                className="glass-card border-2 border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden group"
               >
-                <CardHeader>
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <CardHeader className="relative">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <Badge className="mb-3 bg-primary/10 text-primary hover:bg-primary/20">
+                      <Badge className="mb-3 bg-gradient-to-r from-primary/20 to-accent/20 text-primary hover:from-primary/30 hover:to-accent/30 border-0">
+                        <Star className="h-3 w-3 mr-1" />
                         Featured
                       </Badge>
                       <CardTitle className="text-xl leading-tight">
@@ -89,11 +102,11 @@ const Projects = () => {
                     {project.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 relative">
                   {/* Highlights */}
                   <div className="flex flex-wrap gap-2">
                     {project.highlights.map((highlight) => (
-                      <Badge key={highlight} variant="outline" className="text-xs font-semibold">
+                      <Badge key={highlight} variant="outline" className="text-xs font-semibold bg-background/50">
                         {highlight}
                       </Badge>
                     ))}
@@ -102,7 +115,7 @@ const Projects = () => {
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
+                      <Badge key={tech} variant="secondary" className="text-xs bg-secondary/80">
                         {tech}
                       </Badge>
                     ))}
@@ -110,21 +123,21 @@ const Projects = () => {
 
                   {/* Actions */}
                   <div className="flex flex-wrap gap-3 pt-2">
-                    <Button asChild size="sm" className="gap-1.5">
+                    <Button asChild size="sm" className="gap-1.5 shadow-md hover:shadow-lg">
                       <Link to={project.detailsLink}>
                         View Details
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </Button>
                     {project.liveDemo && (
-                      <Button asChild variant="outline" size="sm" className="gap-1.5">
+                      <Button asChild variant="outline" size="sm" className="gap-1.5 glass">
                         <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="h-3.5 w-3.5" />
                           Live Demo
                         </a>
                       </Button>
                     )}
-                    <Button asChild variant="outline" size="sm" className="gap-1.5">
+                    <Button asChild variant="outline" size="sm" className="gap-1.5 glass">
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="h-3.5 w-3.5" />
                         GitHub
@@ -144,7 +157,7 @@ const Projects = () => {
             {otherProjects.map((project, index) => (
               <Card
                 key={index}
-                className="border hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-soft)]"
+                className="glass-card border hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
               >
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg">{project.title}</CardTitle>
@@ -155,12 +168,12 @@ const Projects = () => {
                 <CardContent className="space-y-4">
                   <div className="flex flex-wrap gap-1.5">
                     {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary" className="text-xs">
+                      <Badge key={tech} variant="secondary" className="text-xs bg-secondary/80">
                         {tech}
                       </Badge>
                     ))}
                   </div>
-                  <Button asChild variant="outline" size="sm" className="gap-1.5 w-full">
+                  <Button asChild variant="outline" size="sm" className="gap-1.5 w-full glass">
                     <a href={project.github} target="_blank" rel="noopener noreferrer">
                       <Github className="h-3.5 w-3.5" />
                       View on GitHub

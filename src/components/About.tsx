@@ -1,10 +1,18 @@
 import { GraduationCap, Target, Briefcase } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import NeuralNetworkDecoration from "./NeuralNetworkDecoration";
 
 const About = () => {
   return (
-    <section id="about" className="section-padding bg-secondary/30">
-      <div className="section-container">
+    <section id="about" className="section-padding relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-secondary/30 to-transparent" />
+      
+      {/* Decorative elements */}
+      <NeuralNetworkDecoration variant="left" className="hidden lg:block" />
+      <NeuralNetworkDecoration variant="right" className="hidden lg:block" />
+      
+      <div className="section-container relative z-10">
         <div className="section-header">
           <h2 className="section-title">About Me</h2>
           <p className="section-subtitle">
@@ -14,10 +22,10 @@ const About = () => {
 
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Brief Background */}
-          <Card className="border-0 shadow-[var(--shadow-card)]">
+          <Card className="glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-6 md:p-8">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg shrink-0">
+                <div className="p-3 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl shrink-0">
                   <GraduationCap className="h-6 w-6 text-primary" />
                 </div>
                 <div>
@@ -35,10 +43,10 @@ const About = () => {
           </Card>
 
           {/* Career Focus */}
-          <Card className="border-0 shadow-[var(--shadow-card)]">
+          <Card className="glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-6 md:p-8">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-accent/10 rounded-lg shrink-0">
+                <div className="p-3 bg-gradient-to-br from-accent/20 to-accent/10 rounded-xl shrink-0">
                   <Target className="h-6 w-6 text-accent" />
                 </div>
                 <div>
@@ -55,10 +63,10 @@ const About = () => {
           </Card>
 
           {/* What I'm Looking For */}
-          <Card className="border-0 shadow-[var(--shadow-card)]">
+          <Card className="glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardContent className="p-6 md:p-8">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg shrink-0">
+                <div className="p-3 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl shrink-0">
                   <Briefcase className="h-6 w-6 text-primary" />
                 </div>
                 <div>
