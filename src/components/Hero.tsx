@@ -8,24 +8,48 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center pt-16 bg-[image:var(--gradient-hero)]">
-      <div className="section-container py-20">
+    <section id="home" className="min-h-screen flex items-center pt-16 relative overflow-hidden">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-[image:var(--gradient-hero)]" />
+      
+      {/* Decorative orbs */}
+      <div className="absolute top-20 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+      
+      {/* Circuit pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="50" cy="50" r="2" fill="currentColor" className="text-primary" />
+              <path d="M50 0 L50 48 M50 52 L50 100 M0 50 L48 50 M52 50 L100 50" stroke="currentColor" strokeWidth="0.5" className="text-primary" />
+              <circle cx="50" cy="0" r="1" fill="currentColor" className="text-accent" />
+              <circle cx="0" cy="50" r="1" fill="currentColor" className="text-accent" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#circuit)" />
+        </svg>
+      </div>
+
+      <div className="section-container py-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Profile Image */}
           <div className="flex justify-center mb-6">
-            <div className="relative">
+            <div className="relative group">
+              <div className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-30 blur-md group-hover:opacity-50 transition-opacity animate-glow" />
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full opacity-20 blur-sm" />
               <img
                 src={profileImage}
                 alt="Vinod Bavage - Data Scientist"
-                className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-background shadow-lg"
+                className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-background shadow-xl"
               />
             </div>
           </div>
 
           {/* Name & Role */}
           <div className="space-y-3">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+            <h1 className="text-4xl md:text-6xl font-bold gradient-text">
               Vinod Bavage
             </h1>
             <p className="text-xl md:text-2xl text-primary font-medium">
@@ -45,7 +69,7 @@ const Hero = () => {
             <Button
               size="lg"
               onClick={() => scrollToSection("projects")}
-              className="gap-2"
+              className="gap-2 shadow-lg hover:shadow-xl transition-shadow"
             >
               View Projects
               <ArrowRight className="h-4 w-4" />
@@ -54,6 +78,7 @@ const Hero = () => {
               size="lg"
               variant="outline"
               asChild
+              className="glass hover:bg-primary/10"
             >
               <a
                 href="https://github.com/vinodbavage31"
@@ -69,6 +94,7 @@ const Hero = () => {
               size="lg"
               variant="outline"
               asChild
+              className="glass hover:bg-primary/10"
             >
               <a
                 href="https://www.linkedin.com/in/vinodbavage"
@@ -84,6 +110,7 @@ const Hero = () => {
               size="lg"
               variant="outline"
               asChild
+              className="glass hover:bg-primary/10"
             >
               <a href="/Vinod_Bavage_Resume.pdf" download className="gap-2">
                 <Download className="h-4 w-4" />
