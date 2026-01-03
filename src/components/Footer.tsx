@@ -35,10 +35,10 @@ const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-t from-card via-card to-transparent" />
+      {/* Gradient top border */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       
-      <div className="relative border-t bg-card/80 backdrop-blur-sm">
+      <div className="relative bg-card/50 backdrop-blur-xl border-t border-border/30">
         <div className="section-container py-12">
           <div className="grid md:grid-cols-3 gap-8">
             {/* Brand */}
@@ -81,7 +81,7 @@ const Footer = () => {
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
                     rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="p-2.5 rounded-xl bg-gradient-to-br from-secondary to-secondary/50 hover:from-primary/20 hover:to-accent/20 text-muted-foreground hover:text-primary transition-all duration-300 hover:shadow-md"
+                    className="p-3 rounded-xl bg-secondary/50 border border-border/30 hover:border-primary/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
                     aria-label={link.label}
                   >
                     <link.icon className="h-5 w-5" />
@@ -92,7 +92,7 @@ const Footer = () => {
           </div>
 
           {/* Bottom */}
-          <div className="mt-10 pt-6 border-t border-border/50 text-center">
+          <div className="mt-10 pt-6 border-t border-border/30 text-center">
             <p className="text-sm text-muted-foreground">
               © {currentYear} Vinod Bavage. All rights reserved.
             </p>

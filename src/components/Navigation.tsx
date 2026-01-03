@@ -29,9 +29,9 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b shadow-sm"
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
           : "bg-transparent"
       }`}
     >
@@ -40,7 +40,7 @@ const Navigation = () => {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("home")}
-            className="text-xl font-bold text-foreground hover:text-primary transition-colors"
+            className="text-xl font-bold gradient-text hover:opacity-80 transition-opacity"
           >
             Vinod Bavage
           </button>
@@ -51,20 +51,21 @@ const Navigation = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
               >
                 {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300" />
               </button>
             ))}
           </div>
 
           {/* Social Links & Mobile Menu */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <a
               href="https://www.linkedin.com/in/vinodbavage"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-5 w-5" />
@@ -73,7 +74,7 @@ const Navigation = () => {
               href="https://github.com/vinodbavage31"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
               aria-label="GitHub"
             >
               <Github className="h-5 w-5" />
@@ -92,13 +93,13 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background border-b">
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50">
           <div className="section-container py-4 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-colors"
+                className="block w-full text-left px-4 py-3 text-sm font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
               >
                 {item.label}
               </button>
