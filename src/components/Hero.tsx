@@ -9,50 +9,54 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center pt-16 relative overflow-hidden">
-      {/* Animated gradient background */}
+      {/* Hero gradient overlay */}
       <div className="absolute inset-0 bg-[image:var(--gradient-hero)]" />
       
-      {/* Decorative orbs */}
-      <div className="absolute top-20 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+      {/* Large decorative orbs with strong glow */}
+      <div className="absolute top-10 right-10 w-80 h-80 bg-primary/20 rounded-full blur-[100px] animate-pulse-glow" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse-glow" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[150px]" />
       
-      {/* Circuit pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+      {/* Hexagon grid pattern */}
+      <div className="absolute inset-0 opacity-[0.04]">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="circuit" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <circle cx="50" cy="50" r="2" fill="currentColor" className="text-primary" />
-              <path d="M50 0 L50 48 M50 52 L50 100 M0 50 L48 50 M52 50 L100 50" stroke="currentColor" strokeWidth="0.5" className="text-primary" />
-              <circle cx="50" cy="0" r="1" fill="currentColor" className="text-accent" />
-              <circle cx="0" cy="50" r="1" fill="currentColor" className="text-accent" />
+            <pattern id="hexagons" x="0" y="0" width="56" height="100" patternUnits="userSpaceOnUse">
+              <path d="M28 0 L56 17 L56 50 L28 67 L0 50 L0 17 Z" fill="none" stroke="hsl(190 100% 50%)" strokeWidth="0.5" />
+              <path d="M28 33 L56 50 L56 83 L28 100 L0 83 L0 50 Z" fill="none" stroke="hsl(280 100% 65%)" strokeWidth="0.3" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#circuit)" />
+          <rect width="100%" height="100%" fill="url(#hexagons)" />
         </svg>
       </div>
 
       <div className="section-container py-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Profile Image */}
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-8">
             <div className="relative group">
-              <div className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-30 blur-md group-hover:opacity-50 transition-opacity animate-glow" />
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-full opacity-20 blur-sm" />
+              {/* Outer glow ring */}
+              <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-primary via-accent to-primary opacity-30 blur-xl group-hover:opacity-50 transition-all duration-700 animate-glow" />
+              {/* Middle ring */}
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-primary to-accent opacity-40 blur-md" />
+              {/* Inner gradient border */}
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary via-accent to-primary p-0.5">
+                <div className="w-full h-full rounded-full bg-background" />
+              </div>
               <img
                 src={profileImage}
                 alt="Vinod Bavage - Data Scientist"
-                className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-background shadow-xl"
+                className="relative w-36 h-36 md:w-44 md:h-44 rounded-full object-cover border-2 border-primary/30 shadow-2xl"
               />
             </div>
           </div>
 
           {/* Name & Role */}
-          <div className="space-y-3">
-            <h1 className="text-4xl md:text-6xl font-bold gradient-text">
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-7xl font-bold gradient-text neon-text">
               Vinod Bavage
             </h1>
-            <p className="text-xl md:text-2xl text-primary font-medium">
+            <p className="text-xl md:text-2xl font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Data Scientist & Machine Learning Engineer
             </p>
           </div>
@@ -65,11 +69,11 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 pt-4">
+          <div className="flex flex-wrap justify-center gap-4 pt-6">
             <Button
               size="lg"
               onClick={() => scrollToSection("projects")}
-              className="gap-2 shadow-lg hover:shadow-xl transition-shadow"
+              className="gap-2 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:-translate-y-0.5"
             >
               View Projects
               <ArrowRight className="h-4 w-4" />
@@ -78,13 +82,12 @@ const Hero = () => {
               size="lg"
               variant="outline"
               asChild
-              className="glass hover:bg-primary/10"
+              className="gap-2 border-primary/40 bg-primary/5 hover:bg-primary/10 hover:border-primary/60 transition-all duration-300 hover:-translate-y-0.5"
             >
               <a
                 href="https://github.com/vinodbavage31"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gap-2"
               >
                 <Github className="h-4 w-4" />
                 GitHub
@@ -94,13 +97,12 @@ const Hero = () => {
               size="lg"
               variant="outline"
               asChild
-              className="glass hover:bg-primary/10"
+              className="gap-2 border-accent/40 bg-accent/5 hover:bg-accent/10 hover:border-accent/60 transition-all duration-300 hover:-translate-y-0.5"
             >
               <a
                 href="https://www.linkedin.com/in/vinodbavage"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gap-2"
               >
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
@@ -110,9 +112,9 @@ const Hero = () => {
               size="lg"
               variant="outline"
               asChild
-              className="glass hover:bg-primary/10"
+              className="gap-2 border-primary/40 bg-primary/5 hover:bg-primary/10 hover:border-primary/60 transition-all duration-300 hover:-translate-y-0.5"
             >
-              <a href="/Vinod_Bavage_Resume.pdf" download className="gap-2">
+              <a href="/Vinod_Bavage_Resume.pdf" download>
                 <Download className="h-4 w-4" />
                 Resume
               </a>
@@ -120,14 +122,14 @@ const Hero = () => {
           </div>
 
           {/* Scroll Indicator */}
-          <div className="pt-12">
+          <div className="pt-16">
             <button
               onClick={() => scrollToSection("about")}
-              className="inline-flex flex-col items-center text-muted-foreground hover:text-primary transition-colors"
+              className="inline-flex flex-col items-center text-muted-foreground hover:text-primary transition-colors group"
             >
-              <span className="text-sm mb-2">Scroll to explore</span>
-              <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center">
-                <div className="w-1 h-2 bg-current rounded-full mt-2 animate-bounce" />
+              <span className="text-sm mb-3">Scroll to explore</span>
+              <div className="w-7 h-12 border-2 border-current rounded-full flex justify-center group-hover:border-primary transition-colors">
+                <div className="w-1.5 h-3 bg-current rounded-full mt-2 animate-bounce group-hover:bg-primary" />
               </div>
             </button>
           </div>

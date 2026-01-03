@@ -109,11 +109,14 @@ const Contact = () => {
   return (
     <section id="contact" ref={ref} className="section-padding relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-secondary/30 to-secondary/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-primary/5" />
       
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
+      {/* Glowing orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/15 rounded-full blur-[120px]" />
+      
+      {/* Decorative lines */}
+      <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
       <div className="section-container relative z-10">
         <div className={`section-header transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -123,7 +126,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
           {/* Contact Info */}
           <div className={`space-y-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`} style={{ transitionDelay: '100ms' }}>
             <h3 className="text-xl font-semibold">Contact Information</h3>
@@ -134,9 +137,9 @@ const Contact = () => {
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-4 p-4 rounded-xl glass-card hover:shadow-lg transition-all duration-300 group hover:-translate-y-0.5"
+                  className="flex items-center gap-4 p-4 rounded-xl glass-card border-border/30 hover:border-primary/50 transition-all duration-300 group hover:-translate-y-1"
                 >
-                  <div className="p-2.5 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl group-hover:from-primary/30 group-hover:to-primary/20 transition-colors">
+                  <div className="p-3 bg-gradient-to-br from-primary/30 to-primary/10 rounded-xl group-hover:from-primary/40 group-hover:to-primary/20 transition-colors neon-border">
                     <item.icon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
@@ -151,7 +154,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className={`glass-card border-0 shadow-xl transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`} style={{ transitionDelay: '200ms' }}>
+          <Card className={`glass-card border-primary/20 shadow-2xl transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`} style={{ transitionDelay: '200ms' }}>
             <CardContent className="p-6">
               <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -165,7 +168,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     disabled={isSubmitting}
-                    className={`bg-background/50 ${errors.name ? "border-destructive" : ""}`}
+                    className={`bg-secondary/50 border-border/50 focus:border-primary/50 ${errors.name ? "border-destructive" : ""}`}
                   />
                   {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                 </div>
@@ -180,7 +183,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     disabled={isSubmitting}
-                    className={`bg-background/50 ${errors.email ? "border-destructive" : ""}`}
+                    className={`bg-secondary/50 border-border/50 focus:border-primary/50 ${errors.email ? "border-destructive" : ""}`}
                   />
                   {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                 </div>
@@ -195,11 +198,15 @@ const Contact = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     disabled={isSubmitting}
-                    className={`bg-background/50 ${errors.message ? "border-destructive" : ""}`}
+                    className={`bg-secondary/50 border-border/50 focus:border-primary/50 ${errors.message ? "border-destructive" : ""}`}
                   />
                   {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                 </div>
-                <Button type="submit" className="w-full shadow-lg hover:shadow-xl transition-shadow" disabled={isSubmitting}>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 transition-all duration-300" 
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
