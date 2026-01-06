@@ -8,7 +8,8 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { EMAILJS_CONFIG } from "@/lib/emailjs";
 import { z } from "zod";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation, getStaggeredDelay } from "@/hooks/useScrollAnimation";
+import SectionNeurons from "./SectionNeurons";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -17,7 +18,7 @@ const contactSchema = z.object({
 });
 
 const Contact = () => {
-  const { ref, isVisible } = useScrollAnimation(0.1);
+  const { ref, isVisible, scrollProgress } = useScrollAnimation(0.1);
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -109,17 +110,34 @@ const Contact = () => {
   return (
     <section id="contact" ref={ref} className="section-padding relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-primary/5" />
+      <div className="absolute inset-0 bg-gradient-to-b from-accent/8 via-transparent to-primary/8" />
       
-      {/* Glowing orbs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/15 rounded-full blur-[120px]" />
+      {/* Animated Neural Network */}
+      <SectionNeurons isVisible={isVisible} scrollProgress={scrollProgress} variant="full" className="opacity-20" />
       
-      {/* Decorative lines */}
-      <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      {/* Glowing orbs with parallax */}
+      <div 
+        className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse-glow"
+        style={{ transform: `translateY(${scrollProgress * 40}px)` }}
+      />
+      <div 
+        className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-pulse-glow"
+        style={{ animationDelay: '2s', transform: `translateY(${-scrollProgress * 40}px)` }}
+      />
+      
+      {/* Animated decorative line */}
+      <div 
+        className="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+        style={{ 
+          transform: `scaleX(${isVisible ? 1 : 0})`,
+          transition: 'transform 1.5s ease-out',
+        }}
+      />
       
       <div className="section-container relative z-10">
-        <div className={`section-header transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div 
+          className={`section-header scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+        >
           <h2 className="section-title">Get In Touch</h2>
           <p className="section-subtitle">
             Interested in working together? Let's connect and discuss opportunities.
@@ -128,23 +146,33 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
           {/* Contact Info */}
-          <div className={`space-y-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`} style={{ transitionDelay: '100ms' }}>
+          <div 
+            className={`space-y-6 scroll-hidden-left ${isVisible ? 'scroll-visible-left' : ''}`}
+            style={getStaggeredDelay(1, 100)}
+          >
             <h3 className="text-xl font-semibold">Contact Information</h3>
             <div className="space-y-4">
-              {contactInfo.map((item) => (
+              {contactInfo.map((item, index) => (
                 <a
                   key={item.label}
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-4 p-4 rounded-xl glass-card border-border/30 hover:border-primary/50 transition-all duration-300 group hover:-translate-y-1"
+                  className={`flex items-center gap-4 p-4 rounded-xl glass-card border-border/40 hover:border-primary/60 transition-all duration-500 group scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+                  style={getStaggeredDelay(index + 2, 120)}
                 >
-                  <div className="p-3 bg-gradient-to-br from-primary/30 to-primary/10 rounded-xl group-hover:from-primary/40 group-hover:to-primary/20 transition-colors neon-border">
+                  <div 
+                    className="p-3 rounded-xl group-hover:scale-110 transition-all duration-500"
+                    style={{ 
+                      background: 'linear-gradient(135deg, hsl(var(--primary) / 0.4), hsl(var(--primary) / 0.15))',
+                      boxShadow: 'inset 0 0 20px hsl(var(--primary) / 0.15), 0 0 25px hsl(var(--primary) / 0.3)'
+                    }}
+                  >
                     <item.icon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">{item.label}</p>
-                    <p className="font-medium group-hover:text-primary transition-colors">
+                    <p className="font-medium group-hover:text-primary transition-colors duration-300">
                       {item.value}
                     </p>
                   </div>
@@ -154,8 +182,17 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <Card className={`glass-card border-primary/20 shadow-2xl transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`} style={{ transitionDelay: '200ms' }}>
-            <CardContent className="p-6">
+          <Card 
+            className={`glass-card border-primary/30 shadow-2xl scroll-hidden-right ${isVisible ? 'scroll-visible-right' : ''}`}
+            style={getStaggeredDelay(2, 150)}
+          >
+            {/* Glow effect */}
+            <div 
+              className="absolute inset-0 rounded-xl opacity-50"
+              style={{ boxShadow: '0 0 60px hsl(var(--primary) / 0.15)' }}
+            />
+            
+            <CardContent className="p-6 relative">
               <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
@@ -168,7 +205,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     disabled={isSubmitting}
-                    className={`bg-secondary/50 border-border/50 focus:border-primary/50 ${errors.name ? "border-destructive" : ""}`}
+                    className={`bg-secondary/50 border-border/50 focus:border-primary/60 focus:ring-primary/30 transition-all duration-300 ${errors.name ? "border-destructive" : ""}`}
                   />
                   {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                 </div>
@@ -183,7 +220,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     disabled={isSubmitting}
-                    className={`bg-secondary/50 border-border/50 focus:border-primary/50 ${errors.email ? "border-destructive" : ""}`}
+                    className={`bg-secondary/50 border-border/50 focus:border-primary/60 focus:ring-primary/30 transition-all duration-300 ${errors.email ? "border-destructive" : ""}`}
                   />
                   {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                 </div>
@@ -198,13 +235,13 @@ const Contact = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     disabled={isSubmitting}
-                    className={`bg-secondary/50 border-border/50 focus:border-primary/50 ${errors.message ? "border-destructive" : ""}`}
+                    className={`bg-secondary/50 border-border/50 focus:border-primary/60 focus:ring-primary/30 transition-all duration-300 ${errors.message ? "border-destructive" : ""}`}
                   />
                   {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/20 transition-all duration-300" 
+                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300 hover:scale-[1.02]" 
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (

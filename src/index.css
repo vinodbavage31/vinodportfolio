@@ -160,7 +160,15 @@
   }
 
   .animate-slide-up {
-    animation: slideUp 0.6s ease-out forwards;
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-slide-up-strong {
+    animation: slideUpStrong 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .animate-float {
@@ -183,6 +191,10 @@
     animation: gridFlow 20s linear infinite;
   }
 
+  .animate-neuron-pulse {
+    animation: neuronPulse 2s ease-in-out infinite;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -195,11 +207,33 @@
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(60px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUpStrong {
+    from {
+      opacity: 0;
+      transform: translateY(100px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 
@@ -208,13 +242,13 @@
       transform: translateY(0) translateX(0);
     }
     25% {
-      transform: translateY(-15px) translateX(8px);
+      transform: translateY(-20px) translateX(10px);
     }
     50% {
-      transform: translateY(-8px) translateX(-8px);
+      transform: translateY(-10px) translateX(-10px);
     }
     75% {
-      transform: translateY(-20px) translateX(5px);
+      transform: translateY(-25px) translateX(8px);
     }
   }
 
@@ -246,12 +280,12 @@
 
   @keyframes pulseGlow {
     0%, 100% {
-      opacity: 0.3;
+      opacity: 0.4;
       transform: scale(1);
     }
     50% {
-      opacity: 0.6;
-      transform: scale(1.05);
+      opacity: 0.8;
+      transform: scale(1.08);
     }
   }
 
@@ -262,6 +296,62 @@
     100% {
       transform: translateY(-50%);
     }
+  }
+
+  @keyframes neuronPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px hsl(var(--primary) / 0.6));
+      transform: scale(1);
+    }
+    50% {
+      filter: drop-shadow(0 0 20px hsl(var(--primary) / 0.9));
+      transform: scale(1.1);
+    }
+  }
+
+  /* Scroll animation states - STRONG and VISIBLE */
+  .scroll-hidden {
+    opacity: 0;
+    transform: translateY(80px) scale(0.92);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .scroll-hidden-left {
+    opacity: 0;
+    transform: translateX(-100px) scale(0.95);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-visible-left {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  .scroll-hidden-right {
+    opacity: 0;
+    transform: translateX(100px) scale(0.95);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-visible-right {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  .scroll-hidden-scale {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-visible-scale {
+    opacity: 1;
+    transform: scale(1);
   }
 
   /* Glassmorphism utilities - Enhanced */
@@ -279,11 +369,11 @@
   }
 
   .glass-card-hover:hover {
-    @apply border-primary/40;
-    box-shadow: 0 8px 32px hsl(0 0% 0% / 0.5), 
-                0 0 20px hsl(var(--primary) / 0.15),
-                inset 0 1px 0 hsl(var(--primary) / 0.2);
-    transform: translateY(-4px);
+    @apply border-primary/50;
+    box-shadow: 0 12px 40px hsl(0 0% 0% / 0.5), 
+                0 0 30px hsl(var(--primary) / 0.25),
+                inset 0 1px 0 hsl(var(--primary) / 0.3);
+    transform: translateY(-8px) scale(1.02);
   }
 
   /* Gradient text utility - Enhanced */
@@ -292,21 +382,27 @@
     background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%);
   }
 
-  /* Neon glow utilities */
+  /* Neon glow utilities - Stronger */
   .neon-border {
-    box-shadow: inset 0 0 20px hsl(var(--primary) / 0.1),
-                0 0 20px hsl(var(--primary) / 0.2),
-                0 0 40px hsl(var(--primary) / 0.1);
+    box-shadow: inset 0 0 25px hsl(var(--primary) / 0.15),
+                0 0 25px hsl(var(--primary) / 0.3),
+                0 0 50px hsl(var(--primary) / 0.15);
   }
 
   .neon-text {
-    text-shadow: 0 0 10px hsl(var(--primary) / 0.5),
-                 0 0 20px hsl(var(--primary) / 0.3),
-                 0 0 40px hsl(var(--primary) / 0.2);
+    text-shadow: 0 0 15px hsl(var(--primary) / 0.6),
+                 0 0 30px hsl(var(--primary) / 0.4),
+                 0 0 60px hsl(var(--primary) / 0.25);
   }
 
   .neon-glow {
-    filter: drop-shadow(0 0 10px hsl(var(--primary) / 0.5)) 
-            drop-shadow(0 0 20px hsl(var(--primary) / 0.3));
+    filter: drop-shadow(0 0 15px hsl(var(--primary) / 0.6)) 
+            drop-shadow(0 0 30px hsl(var(--primary) / 0.4));
+  }
+
+  .neon-glow-strong {
+    filter: drop-shadow(0 0 20px hsl(var(--primary) / 0.8)) 
+            drop-shadow(0 0 40px hsl(var(--primary) / 0.5))
+            drop-shadow(0 0 60px hsl(var(--primary) / 0.3));
   }
 }
