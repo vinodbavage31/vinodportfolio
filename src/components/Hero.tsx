@@ -1,4 +1,4 @@
-import { ArrowRight, Github, Linkedin, Download, MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile-new.jpg";
 
@@ -70,43 +70,10 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                asChild
+                onClick={() => scrollToSection("about")}
                 className="gap-2 border-primary/40 bg-primary/5 hover:bg-primary/10 hover:border-primary/60 transition-all duration-300 hover:-translate-y-0.5"
               >
-                <a
-                  href="https://github.com/vinodbavage31"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="h-4 w-4" />
-                  GitHub
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="gap-2 border-accent/40 bg-accent/5 hover:bg-accent/10 hover:border-accent/60 transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <a
-                  href="https://www.linkedin.com/in/vinodbavage"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                asChild
-                className="gap-2 border-primary/40 bg-primary/5 hover:bg-primary/10 hover:border-primary/60 transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <a href="/Vinod_Bavage_Resume.pdf" download>
-                  <Download className="h-4 w-4" />
-                  Resume
-                </a>
+                About Me
               </Button>
             </div>
           </div>
