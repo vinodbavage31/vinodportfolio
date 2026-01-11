@@ -1,9 +1,22 @@
-import { GraduationCap, Target, Briefcase, MapPin } from "lucide-react";
+import { useState } from "react";
+import { GraduationCap, Target, Briefcase, MapPin, Github, Linkedin, FileText, Download, Eye, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const About = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
+  const [isResumeDialogOpen, setIsResumeDialogOpen] = useState(false);
+  const [showResumePreview, setShowResumePreview] = useState(false);
+
+  const handleViewResume = () => {
+    setShowResumePreview(true);
+  };
 
   return (
     <section id="about" ref={ref} className="section-padding relative overflow-hidden">
@@ -39,6 +52,103 @@ const About = () => {
             <span className="text-sm font-medium text-foreground/80">Hyderabad, India</span>
           </div>
         </div>
+
+        {/* Social Links - Big Tappable Icons */}
+        <div className={`flex justify-center gap-6 mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '75ms' }}>
+          {/* GitHub */}
+          <a
+            href="https://github.com/vinodbavage31"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center gap-3 p-6 glass-card rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_hsl(190_100%_50%/0.3)] cursor-pointer min-w-[120px]"
+          >
+            <div className="p-4 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-300">
+              <Github className="h-10 w-10 text-primary group-hover:scale-110 transition-transform duration-300" />
+            </div>
+            <span className="text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors">GitHub</span>
+          </a>
+
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/vinodbavage"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center gap-3 p-6 glass-card rounded-2xl border border-accent/20 hover:border-accent/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_hsl(280_100%_65%/0.3)] cursor-pointer min-w-[120px]"
+          >
+            <div className="p-4 bg-gradient-to-br from-accent/20 to-accent/5 rounded-xl group-hover:from-accent/30 group-hover:to-accent/10 transition-all duration-300">
+              <Linkedin className="h-10 w-10 text-accent group-hover:scale-110 transition-transform duration-300" />
+            </div>
+            <span className="text-sm font-medium text-foreground/80 group-hover:text-accent transition-colors">LinkedIn</span>
+          </a>
+
+          {/* Resume */}
+          <button
+            onClick={() => setIsResumeDialogOpen(true)}
+            className="group flex flex-col items-center gap-3 p-6 glass-card rounded-2xl border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_hsl(190_100%_50%/0.3)] cursor-pointer min-w-[120px]"
+          >
+            <div className="p-4 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl group-hover:from-primary/30 group-hover:to-primary/10 transition-all duration-300">
+              <FileText className="h-10 w-10 text-primary group-hover:scale-110 transition-transform duration-300" />
+            </div>
+            <span className="text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors">Resume</span>
+          </button>
+        </div>
+
+        {/* Resume Dialog */}
+        <Dialog open={isResumeDialogOpen} onOpenChange={setIsResumeDialogOpen}>
+          <DialogContent className="glass-card border-primary/30 max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-semibold gradient-text text-center">Resume</DialogTitle>
+            </DialogHeader>
+            
+            {!showResumePreview ? (
+              <div className="flex flex-col gap-4 py-4">
+                <a
+                  href="/Vinod_Bavage_Resume.pdf"
+                  download
+                  className="flex items-center gap-4 p-4 glass-card rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 group"
+                  onClick={() => setIsResumeDialogOpen(false)}
+                >
+                  <div className="p-3 bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg">
+                    <Download className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">Download Resume</p>
+                    <p className="text-sm text-muted-foreground">Save PDF to your device</p>
+                  </div>
+                </a>
+
+                <button
+                  onClick={handleViewResume}
+                  className="flex items-center gap-4 p-4 glass-card rounded-xl border border-accent/20 hover:border-accent/50 transition-all duration-300 hover:-translate-y-1 group text-left"
+                >
+                  <div className="p-3 bg-gradient-to-br from-accent/20 to-accent/5 rounded-lg">
+                    <Eye className="h-6 w-6 text-accent group-hover:scale-110 transition-transform" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">View Resume</p>
+                    <p className="text-sm text-muted-foreground">Preview resume here</p>
+                  </div>
+                </button>
+              </div>
+            ) : (
+              <div className="animate-in zoom-in-95 fade-in duration-300">
+                <button
+                  onClick={() => setShowResumePreview(false)}
+                  className="mb-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  ← Back to options
+                </button>
+                <div className="rounded-xl overflow-hidden border border-primary/20 shadow-lg">
+                  <iframe
+                    src="/Vinod_Bavage_Resume.pdf"
+                    className="w-full h-[60vh]"
+                    title="Resume Preview"
+                  />
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
 
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Brief Background */}
