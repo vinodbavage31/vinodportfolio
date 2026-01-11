@@ -1,4 +1,4 @@
-import { GraduationCap, Target, Briefcase } from "lucide-react";
+import { GraduationCap, Target, Briefcase, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -20,6 +20,24 @@ const About = () => {
           <p className="section-subtitle">
             Passionate about turning data into insights and building intelligent solutions
           </p>
+        </div>
+
+        {/* Status badges */}
+        <div className={`flex flex-wrap justify-center gap-4 mb-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '50ms' }}>
+          {/* Open to Work badge */}
+          <div className="flex items-center gap-2 px-5 py-2.5 glass-card rounded-full border border-green-500/30 bg-green-500/10">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <span className="text-sm font-medium text-green-400">Open to Work</span>
+          </div>
+          
+          {/* Location badge */}
+          <div className="flex items-center gap-2 px-5 py-2.5 glass-card rounded-full border border-primary/30">
+            <MapPin className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-foreground/80">Hyderabad, India</span>
+          </div>
         </div>
 
         <div className="max-w-4xl mx-auto space-y-6">
