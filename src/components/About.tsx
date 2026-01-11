@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GraduationCap, Target, Briefcase, MapPin, Github, Linkedin, FileText, Download, Eye, X } from "lucide-react";
+import { GraduationCap, Target, Briefcase, MapPin, Github, Linkedin, FileText, Download, Eye } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import resumePreview from "@/assets/resume-preview.png";
 
 const About = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
@@ -138,11 +139,12 @@ const About = () => {
                 >
                   ← Back to options
                 </button>
-                <div className="rounded-xl overflow-hidden border border-primary/20 shadow-lg">
-                  <iframe
-                    src="/Vinod_Bavage_Resume.pdf"
-                    className="w-full h-[60vh]"
-                    title="Resume Preview"
+                <div className="rounded-xl overflow-hidden border border-primary/20 shadow-lg max-h-[70vh] overflow-y-auto">
+                  <img
+                    src={resumePreview}
+                    alt="Vinod Bavage Resume"
+                    className="w-full h-auto object-contain"
+                    style={{ imageRendering: 'crisp-edges' }}
                   />
                 </div>
               </div>
